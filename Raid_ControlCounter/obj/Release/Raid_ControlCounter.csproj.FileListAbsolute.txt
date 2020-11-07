@@ -1,0 +1,12 @@
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\bin\Release\Raid_ControlCounter.exe.config
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\bin\Release\Raid_ControlCounter.exe
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\bin\Release\Raid_ControlCounter.pdb
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.csprojAssemblyReference.cache
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.Form1.resources
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.Form2.resources
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.Form3.resources
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.Form4.resources
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.Properties.Resources.resources
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.csproj.GenerateResource.cache
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.exe
+C:\Users\Kamishiro\Desktop\遊戲資料\Raid_ControlCounter\Raid_ControlCounter\obj\Release\Raid_ControlCounter.pdb
