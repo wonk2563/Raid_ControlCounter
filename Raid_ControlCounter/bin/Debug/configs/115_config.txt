@@ -1,0 +1,2 @@
+hotkey=162
+hotkey2=0

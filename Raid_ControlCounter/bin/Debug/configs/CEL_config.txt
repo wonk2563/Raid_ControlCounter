@@ -1,0 +1,3 @@
+hotkey=162
+level=40
+autocheak=True

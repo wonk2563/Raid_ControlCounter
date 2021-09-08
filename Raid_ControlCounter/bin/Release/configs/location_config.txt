@@ -1,0 +1,6 @@
+raid_location=684,336
+115_location=684,336
+cel_location=684,336
+vi_location=684,336
+155_location=684,336
+Customize_location=684,336

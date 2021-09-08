@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +37,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,11 +48,28 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>stopwatch-timer-countdown-counter-512.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D9.4.2.0\lib\net45\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,54 +83,165 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Form_115_Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form_115_Home.Designer.cs">
+      <DependentUpon>Form_115_Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Form_Customize_Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Form_Customize_Home.Designer.cs">
+      <DependentUpon>Form_Customize_Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="Form_Customize_Setting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="Form_Customize_Setting.Designer.cs">
+      <DependentUpon>Form_Customize_Setting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form4.cs">
+    <Compile Include="Form_155_Setting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="Form_155_Setting.Designer.cs">
+      <DependentUpon>Form_155_Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CEL_Setting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CEL_Setting.Designer.cs">
+      <DependentUpon>Form_CEL_Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_155_Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_155_Home.Designer.cs">
+      <DependentUpon>Form_155_Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CEL_Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CEL_Home.Designer.cs">
+      <DependentUpon>Form_CEL_Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Raid_Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Raid_Home.Designer.cs">
+      <DependentUpon>Form_Raid_Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Raid_Resis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Raid_Resis.Designer.cs">
+      <DependentUpon>Form_Raid_Resis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_update.Designer.cs">
+      <DependentUpon>Form_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_VI_Hotkey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_VI_Hotkey.Designer.cs">
+      <DependentUpon>Form_VI_Hotkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_115_Hotkey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_115_Hotkey.Designer.cs">
+      <DependentUpon>Form_115_Hotkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Raid_Controler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Raid_Controler.Designer.cs">
+      <DependentUpon>Form_Raid_Controler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_About.Designer.cs">
+      <DependentUpon>Form_About.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalKeyBoardHook.cs" />
+    <Compile Include="Form_MainHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_MainHome.Designer.cs">
+      <DependentUpon>Form_MainHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Form_VI_Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_VI_Home.Designer.cs">
+      <DependentUpon>Form_VI_Home.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form_115_Home.resx">
+      <DependentUpon>Form_115_Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Customize_Home.resx">
+      <DependentUpon>Form_Customize_Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Customize_Setting.resx">
+      <DependentUpon>Form_Customize_Setting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="Form_155_Setting.resx">
+      <DependentUpon>Form_155_Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CEL_Setting.resx">
+      <DependentUpon>Form_CEL_Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_155_Home.resx">
+      <DependentUpon>Form_155_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CEL_Home.resx">
+      <DependentUpon>Form_CEL_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Raid_Home.resx">
+      <DependentUpon>Form_Raid_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Raid_Resis.resx">
+      <DependentUpon>Form_Raid_Resis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_update.resx">
+      <DependentUpon>Form_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_VI_Hotkey.resx">
+      <DependentUpon>Form_VI_Hotkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_115_Hotkey.resx">
+      <DependentUpon>Form_115_Hotkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Raid_Controler.resx">
+      <DependentUpon>Form_Raid_Controler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_About.resx">
+      <DependentUpon>Form_About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_MainHome.resx">
+      <DependentUpon>Form_MainHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Form_VI_Home.resx">
+      <DependentUpon>Form_VI_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,7 +256,60 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\about.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\close2.png" />
+    <None Include="Resources\cheak.png" />
+    <None Include="Resources\on.png" />
+    <None Include="Resources\off2.png" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\2Heroic_Wrath_Mirror %281%29.png" />
+    <None Include="Resources\10-6Title32.png" />
+    <None Include="Resources\Heroic_Wrath_Mirror %281%29.png" />
+    <None Include="Resources\HQ_Shop_Item_78910 %281%29.png" />
+    <None Include="Resources\Icon_-_Apsara.png" />
+    <None Include="Resources\Icon_-_Bloody_Queen.png" />
+    <None Include="Resources\Icon_-_Code_Esencia.png" />
+    <None Include="Resources\Icon_-_Devi.png" />
+    <None Include="Resources\Icon_-_Empire_Sword.png" />
+    <None Include="Resources\Icon_-_Minerva.png" />
+    <None Include="Resources\Icon_-_Nova_Imperator.png" />
+    <None Include="Resources\Icon_-_Oz_Sorcerer.png" />
+    <None Include="Resources\Icon_-_Rage_Hearts.png" />
+    <None Include="Resources\Icon_-_Rune_Master.png" />
+    <None Include="Resources\Icon_-_Aether_Sage.png" />
+    <None Include="Resources\Icon_-_Bluhen.png" />
+    <None Include="Resources\Icon_-_Daybreaker.png" />
+    <None Include="Resources\Icon_-_Diangelion_%28Iblis%29.png" />
+    <None Include="Resources\Icon_-_Dominator.png" />
+    <None Include="Resources\Icon_-_Herrsche2r.png" />
+    <None Include="Resources\Icon_-_Herrscher.png" />
+    <None Include="Resources\Icon_-_Radiant_Soul.png" />
+    <None Include="Resources\Icon_-_Richter.png" />
+    <None Include="Resources\Icon_-_Shakti.png" />
+    <None Include="Resources\HQ_Shop_Item_WaterSphere %281%29.png" />
+    <None Include="Resources\Icon_-_Nyx_Pieta.png" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="115_b.png" />
+    <None Include="12_b.png" />
+    <None Include="icon.ico" />
+    <None Include="Resources\vi_b.png" />
+    <None Include="155_b.png" />
+    <None Include="cel_b.png" />
     <Content Include="stopwatch-timer-countdown-counter-512.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

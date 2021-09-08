@@ -1,0 +1,2 @@
+hotkey=162
+seconds=0
