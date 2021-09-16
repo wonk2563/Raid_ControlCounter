@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Drawing.Drawing2D;
 using System.Net;
 
 namespace Raid_ControlCounter
@@ -20,6 +21,7 @@ namespace Raid_ControlCounter
         public Form_MainHome()
         {
             InitializeComponent();
+            this.Text = this.Text + Properties.Resources.Version;
             Initial();
             Create_LocationConfig();
             ReadIDsByTXT();

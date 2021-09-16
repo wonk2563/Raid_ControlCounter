@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MainHome));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_Customize = new System.Windows.Forms.Button();
             this.btn_155 = new System.Windows.Forms.Button();
             this.btn_Raid = new System.Windows.Forms.Button();
             this.btn_cel = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.line = new System.Windows.Forms.Label();
             this.btn_exit = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
-            this.btn_Customize = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -72,10 +72,28 @@
             this.panel2.Controls.Add(this.btn_cel);
             this.panel2.Controls.Add(this.btn_vi);
             this.panel2.Controls.Add(this.btn_115);
-            this.panel2.Location = new System.Drawing.Point(0, 22);
+            this.panel2.Location = new System.Drawing.Point(2, 22);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(227, 201);
+            this.panel2.Size = new System.Drawing.Size(225, 201);
             this.panel2.TabIndex = 5;
+            // 
+            // btn_Customize
+            // 
+            this.btn_Customize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btn_Customize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_Customize.BackgroundImage")));
+            this.btn_Customize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_Customize.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_Customize.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btn_Customize.FlatAppearance.BorderSize = 0;
+            this.btn_Customize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Customize.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn_Customize.Location = new System.Drawing.Point(3, 258);
+            this.btn_Customize.Name = "btn_Customize";
+            this.btn_Customize.Size = new System.Drawing.Size(200, 45);
+            this.btn_Customize.TabIndex = 5;
+            this.btn_Customize.Text = "自訂計時器";
+            this.btn_Customize.UseVisualStyleBackColor = false;
+            this.btn_Customize.Click += new System.EventHandler(this.btn_Customize_Click);
             // 
             // btn_155
             // 
@@ -299,24 +317,6 @@
             this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
-            // btn_Customize
-            // 
-            this.btn_Customize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btn_Customize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_Customize.BackgroundImage")));
-            this.btn_Customize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_Customize.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_Customize.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btn_Customize.FlatAppearance.BorderSize = 0;
-            this.btn_Customize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Customize.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_Customize.Location = new System.Drawing.Point(3, 258);
-            this.btn_Customize.Name = "btn_Customize";
-            this.btn_Customize.Size = new System.Drawing.Size(200, 45);
-            this.btn_Customize.TabIndex = 5;
-            this.btn_Customize.Text = "自訂計時器";
-            this.btn_Customize.UseVisualStyleBackColor = false;
-            this.btn_Customize.Click += new System.EventHandler(this.btn_Customize_Click);
-            // 
             // Form_MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -333,7 +333,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_MainHome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "毛毛計時TREE－首頁";
+            this.Text = "毛毛計時TREE－首頁 V";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.home_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

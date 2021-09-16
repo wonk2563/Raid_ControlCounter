@@ -311,6 +311,15 @@ namespace Raid_ControlCounter.Properties {
         }
         
         /// <summary>
+        ///   查詢類似 1.1.0 的當地語系化字串。
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
         internal static System.Drawing.Bitmap vi_b {
