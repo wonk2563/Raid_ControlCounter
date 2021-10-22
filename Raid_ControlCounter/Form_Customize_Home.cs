@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Raid_ControlCounter
 {
@@ -33,28 +34,38 @@ namespace Raid_ControlCounter
         {
             if (e.KeyValue == hotkey && e.KeyValue != 0)
             {
-                count_down = seconds;
+                stopWatch.Restart();
+                timer_count.Stop();
+                stopTime = seconds * 1000;
+                stopWatch.Start();
                 timer_count.Start();
             }
         }
 
-        decimal count_down = 0;
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.DarkGray, ButtonBorderStyle.Solid);
+        }
+
+
+        decimal stopTime, remainingTime;
+        Stopwatch stopWatch = new Stopwatch();
         private void timer_count_Tick(object sender, EventArgs e)
         {
-            count_down -= (decimal)0.1;
-            label1.Text = Convert.ToString(count_down);
-            if (count_down <= 0)
+            remainingTime = decimal.Round((stopTime - stopWatch.ElapsedMilliseconds) / 1000, 1);
+            label1.Text = Convert.ToString(remainingTime);
+            if (stopTime <= stopWatch.ElapsedMilliseconds)
             {
-                count_down = seconds;
-                label1.Text = Convert.ToString(0);
+                stopWatch.Reset();
                 timer_count.Stop();
-            }            
+                label1.Text = Convert.ToString(0);
+            }          
         }
 
         private void 快捷鍵與靈敏度設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer_count.Stop();
-            Form_Customize_Setting setting = new Form_Customize_Setting();
+            Form_Customize_Hotkey setting = new Form_Customize_Hotkey();
             setting.FormClosed += new FormClosedEventHandler(Form_FormClosed);
             gHook.unhook();
             setting.Show();
@@ -64,8 +75,7 @@ namespace Raid_ControlCounter
         private void 重置ToolStripMenuItem_Click(object sender, EventArgs e)
         {            
             timer_count.Stop();
-            count_down = seconds;
-            label1.Text = Convert.ToString(count_down);
+            label1.Text = Convert.ToString(seconds);
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
@@ -97,7 +107,7 @@ namespace Raid_ControlCounter
                             }
 
                             if (name == "hotkey")
-                                hotkey = Int32.Parse(stutas);
+                                hotkey = Int32.Parse(stutas.Split(',')[0]);
                             if (name == "seconds")
                             {
                                 seconds = Int32.Parse(stutas);

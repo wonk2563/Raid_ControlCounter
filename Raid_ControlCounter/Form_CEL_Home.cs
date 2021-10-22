@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 namespace Raid_ControlCounter
 {
@@ -16,27 +18,25 @@ namespace Raid_ControlCounter
     {
         GlobalKeyboardHook gHook;
         IntPtr el_hWnd;
-        int hotkey = 0, level = 250;
+        int hotkey = 0, hotkey2 = 0, level = 250;
         bool autocheak = true , bkw_cancel = false;
 
 
         public Form_CEL_Home()
         {
             InitializeComponent();
-            label1.Text = before_unknow.ToString();
+            label1.Text = effectList[0].ToString();
+            stopTime = effectList[0] * 1000;
             ReadIDsByTXT();
 
             Get_el_hwnd();
-            convertImg_Hash = GetHash(convertImg);
-            convertImg2_Hash = GetHash(convertImg2);
 
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(bgwWorker_ProgressChanged);
             backgroundWorker1.WorkerReportsProgress = true;
             if (autocheak)
             {
-                backgroundWorker1.RunWorkerAsync();
-                bkw_cancel = false;
+                Start_BGWorker();
             }    
 
             gHook = new GlobalKeyboardHook();
@@ -46,18 +46,56 @@ namespace Raid_ControlCounter
             gHook.hook();
         }
 
+        bool isStop = false , manual_start = false;
         private void gHook_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == hotkey && e.KeyValue != 0 && !counting)
             {
-                label2.Text = "未知倒數";
-                label2.ForeColor = Color.Black;
-                bkw_cancel = true;
-                timer_count.Start();
+                if (!isStop)
+                {
+                    Stop_BGWorker();
+                    effectNum = 0;
+                    stopTime = effectList[0] * 1000;
+                    Change_Label_Text_and_Color("光線蒐集", Color.SteelBlue);
+                    timer_count.Start();
+                    stopWatch.Start();
+                    manual_start = true;
+                }
+                else
+                {
+                    Start_Counting();
+                }               
+            }
+            else if (e.KeyValue == hotkey2 && e.KeyValue != 0 && !isStop)
+            {
+                Stop_Counting();
             }
         }
 
-        int similarDegree = 500 , similarDegree2 = 500;
+        public void Stop_Counting()
+        {
+            timer_count.Stop();
+            stopWatch.Stop();
+            isStop = true;
+            counting = false;
+        }
+
+        public void Start_Counting()
+        {
+            timer_count.Start();
+            stopWatch.Start();
+            isStop = false;
+            counting = true;
+        }
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.DarkGray, ButtonBorderStyle.Solid);
+        }
+
+
+        //======================================================
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
@@ -67,85 +105,120 @@ namespace Raid_ControlCounter
                     Get_el_hwnd();
                     if (el_hWnd != (IntPtr)0)
                     {
-                        backgroundWorker1.ReportProgress(80);
+                        if(!counting && !isStop)
+                            backgroundWorker1.ReportProgress(80);
 
-                        Cap_El_SC();
-                        SourceImg_Hash = GetHash(SourceImg);
-                        similarDegree = CalcSimilarDegree(SourceImg_Hash, convertImg_Hash);
-                        similarDegree2 = CalcSimilarDegree(SourceImg_Hash, convertImg2_Hash);
+                        Get_ELcap_Hash();
+
+                        if (Is_Entering_Games() && !counting)
+                        {
+                            while (Is_Entering_Games())
+                            {
+                                Get_ELcap_Hash();
+                                GC.Collect();
+                                Thread.Sleep(100);
+                            }
+                            backgroundWorker1.ReportProgress(100);
+                        }                        
                     }
                     else
                     {
                         backgroundWorker1.ReportProgress(90);
                     }
-                    GC.Collect();
-
-                    if ((similarDegree <= level || similarDegree2 <= level) && !counting)
-                    {
-                        while (similarDegree <= level || similarDegree2 <= level)
-                        {
-                            Cap_El_SC();
-                            SourceImg_Hash = GetHash(SourceImg);
-                            similarDegree = CalcSimilarDegree(SourceImg_Hash, convertImg_Hash);
-                            similarDegree2 = CalcSimilarDegree(SourceImg_Hash, convertImg2_Hash);
-                            GC.Collect();
-                            Thread.Sleep(500);
-                        }
-                        backgroundWorker1.ReportProgress(100);
-                        break;
-                    }
-                    Thread.Sleep(500);
+                    GC.Collect();                    
+                    Thread.Sleep(200);
                 }
                 else
                     break;
             }            
         }
 
-        private void bgwWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void Stop_BGWorker()
         {
-            if (e.ProgressPercentage is 80)
-            {
-                label2.Text = "未知倒數";
-                label2.ForeColor = Color.Black;
-            }
-            else if (e.ProgressPercentage is 90)
-            {
-                label2.Text = "未偵測到遊戲";
-                label2.ForeColor = Color.Firebrick;
-            }
-            else if (e.ProgressPercentage is 100)
-                timer_count.Start();
+            bkw_cancel = true;
         }
 
-        bool unknow = false , counting = false;
-        decimal count_down = 55, before_unknow = 55, unknow_now = 5;
+        private void Start_BGWorker()
+        {
+            bkw_cancel = false;
+            if(!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();            
+        }
+
+        private void bgwWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+            if (e.ProgressPercentage is 60)
+            {
+                Stop_Counting();
+            }
+            if (e.ProgressPercentage is 70)
+            {
+                Start_Counting();
+            }
+            if (e.ProgressPercentage is 80)
+            {
+                Change_Label_Text_and_Color("光線蒐集",Color.SteelBlue);
+            }
+            else if (e.ProgressPercentage is 90 && !manual_start)
+            {
+                Change_Label_Text_and_Color("未偵測到遊戲", Color.Firebrick);
+            }
+            else if (e.ProgressPercentage is 100)
+            {
+                stopWatch.Reset();
+                timer_count.Start();
+                stopWatch.Start();
+            }
+        }
+
+        bool counting = false;
+        decimal[] effectList = { 20 , 20 , 15 , 5 };
+        decimal stopTime, remainingTime;
+        int effectNum = 0;
+        Stopwatch stopWatch = new Stopwatch();
         private void timer_count_Tick(object sender, EventArgs e)
         {
-            count_down -= (decimal)0.1;
-            label1.Text = Convert.ToString(count_down);
-            if (!unknow && count_down <= 0)
-            {                
-                count_down = unknow_now;
-                label1.Text = Convert.ToString(unknow_now);
-                label2.Text = "未知持續中";
-                label2.ForeColor = Color.Firebrick;
-                unknow = true;
-            }
-            else if (unknow && count_down <= 0)
+            counting = true;
+            remainingTime = decimal.Round((stopTime - stopWatch.ElapsedMilliseconds) / 1000, 1);
+            label1.Text = Convert.ToString(remainingTime);
+            if (stopTime <= stopWatch.ElapsedMilliseconds)
             {
-                count_down = before_unknow;
-                label1.Text = Convert.ToString(before_unknow);
-                label2.Text = "未知倒數";
-                label2.ForeColor = Color.Black;
-                unknow = false;
-            }
+                stopWatch.Reset();
+
+                if (effectNum == 3)
+                    effectNum = 0;
+                else
+                    effectNum++;                
+                stopTime = effectList[effectNum] * 1000;
+                label1.Text = Convert.ToString(effectList[effectNum]);
+
+                if(effectNum == 0)  //光線蒐集
+                {
+                    Change_Label_Text_and_Color("光線蒐集", Color.SteelBlue);
+                }
+                else if (effectNum == 1)    //月亮空亡
+                {
+                    Change_Label_Text_and_Color("月亮空亡", Color.Purple);
+                }
+                else if (effectNum == 2)    //審判
+                {
+                    Change_Label_Text_and_Color("審判", Color.Olive);
+                }
+                else if (effectNum == 3)    //未知
+                {
+                    Change_Label_Text_and_Color("未知", Color.Firebrick);
+                }
+
+                stopWatch.Start();
+            }            
         }
 
         private void 快捷鍵與靈敏度設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_CEL_Setting setting = new Form_CEL_Setting();
+            Form_CEL_Hotkey setting = new Form_CEL_Hotkey();
             setting.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-            bkw_cancel = true;
+            Stop_BGWorker();
             setting.Show();
             this.Hide();
         }
@@ -154,40 +227,54 @@ namespace Raid_ControlCounter
         {
             if (autocheak && !backgroundWorker1.IsBusy)
             {
-                backgroundWorker1.RunWorkerAsync();
-                bkw_cancel = false;
+                Start_BGWorker();             
             }
-            timer_count.Stop();
-            count_down = before_unknow;
-            label1.Text = Convert.ToString(before_unknow);
-            label2.Text = "未知倒數";
-            label2.ForeColor = Color.Black;
-            unknow = false;
+            TimerReset();
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
             ReadIDsByTXT();
-            if (autocheak && !backgroundWorker1.IsBusy)
+            if (autocheak && !backgroundWorker1.IsBusy && !manual_start) //有開啟自動偵測並且沒有在偵測中，也不是手動模式
             {
-                bkw_cancel = false;
-                backgroundWorker1.RunWorkerAsync();
-            }           
-            else
-                bkw_cancel = true;
+                Start_BGWorker();
+            }
+            else if (!autocheak) //沒有開啟自動偵測
+            {
+                Stop_BGWorker();
+                TimerReset();
+            }
+        }
+
+        public void TimerReset() //重置計時
+        {            
+            timer_count.Stop();
+            stopWatch.Reset();
+            effectNum = 0;
+            label1.Text = Convert.ToString(effectList[0]);
+            Change_Label_Text_and_Color("光線蒐集", Color.SteelBlue);
+            counting = false;
+            isStop = false;
+            manual_start = false;
+        }
+
+        public void Change_Label_Text_and_Color(string st , Color color)
+        {
+            label2.Text = st;
+            label2.ForeColor = color;
         }
 
         private void ReadIDsByTXT()
         {
             string name = "", stutas = "";
             string path = AppDomain.CurrentDomain.BaseDirectory + "configs/CEL_config.txt";
+            string Hashpath = AppDomain.CurrentDomain.BaseDirectory + "image/Hash.txt";
             if (System.IO.File.Exists(path))
             {
                 try
                 {
                     string[] lines = System.IO.File.ReadAllLines(@path);
-
                     foreach (string line in lines)
                     {
                         string[] words = line.Split('=');
@@ -199,13 +286,22 @@ namespace Raid_ControlCounter
                                 stutas = words[1];
                             }
 
-                            if (name == "hotkey")
-                                hotkey = Int32.Parse(stutas);
+                            if (name == "hotkey1")
+                                hotkey = Int32.Parse(stutas.Split(',')[0]);
+                            if (name == "hotkey2")
+                                hotkey2 = Int32.Parse(stutas.Split(',')[0]);
                             if (name == "level")
                                 level = Int32.Parse(stutas) + 200;
                             if (name == "autocheak")
                                 autocheak = Convert.ToBoolean(stutas);
                         }
+                    }
+
+                    lines = System.IO.File.ReadAllLines(Hashpath);
+                    hashList = new List<string>();
+                    foreach (string line in lines)
+                    {
+                        hashList.Add(line);
                     }
                 }
                 catch (Exception)
@@ -342,24 +438,31 @@ namespace Raid_ControlCounter
         Bitmap bmp;
         public Bitmap GetWindowCapture(IntPtr hWnd , float dpi)
         {
-            hscrdc = GetWindowDC(hWnd);
-            Rectangle windowRect = new Rectangle();
-            GetWindowRect(hWnd, ref windowRect);
+            try
+            {
+                hscrdc = GetWindowDC(hWnd);
+                Rectangle windowRect = new Rectangle();
+                GetWindowRect(hWnd, ref windowRect);
 
-            int width = Math.Abs((int)((windowRect.Width - windowRect.X) * dpi));
-            int height = Math.Abs((int)((windowRect.Height - windowRect.Y) * dpi));
-            int win_X = (int)(windowRect.X * dpi);
-            int win_Y = (int)(windowRect.Y * dpi);
-            bmp = new Bitmap(width,
-                height);
-            var size = new Size(width,
-                height);
-            Graphics graphics = Graphics.FromImage(bmp as Image);
-            graphics.CopyFromScreen(win_X, win_Y, 0, 0, size);
-            graphics.Dispose();
-            DeleteDC(hscrdc);//删除用过的对象
+                int width = Math.Abs((int)((windowRect.Width - windowRect.X) * dpi));
+                int height = Math.Abs((int)((windowRect.Height - windowRect.Y) * dpi));
+                int win_X = (int)(windowRect.X * dpi);
+                int win_Y = (int)(windowRect.Y * dpi);
+                bmp = new Bitmap(width,
+                    height);
+                var size = new Size(width,
+                    height);
+                Graphics graphics = Graphics.FromImage(bmp as Image);
+                graphics.CopyFromScreen(win_X, win_Y, 0, 0, size);
+                graphics.Dispose();
+                DeleteDC(hscrdc);//删除用过的对象
 
-            return bmp;
+                return bmp;
+            }
+            catch (Exception)
+            {
+                throw;
+            }           
         }
 
         //擷取艾爾之光的畫面
@@ -381,11 +484,57 @@ namespace Raid_ControlCounter
 
         //======================比較圖片相似度=============================
 
+        public bool Is_Entering_Games()  //比較轉場圖片相似度
+        {
+            CalcAllSimilarDegree();
 
-        Image SourceImg, 
-            convertImg = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "image/convert.png"),
-            convertImg2 = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "image/convert2.png");
-        string SourceImg_Hash, convertImg_Hash, convertImg2_Hash;
+            bool isSimilar = false;
+            foreach (int similar in similarList)
+            {
+                if (similar <= level)
+                    isSimilar =  true;
+            }
+            return isSimilar;
+        }
+
+        List<int> similarList;
+        public void CalcAllSimilarDegree()  //計算所有圖片相似度
+        {
+            similarList = new List<int>();
+            foreach (string hash in hashList)
+            {
+                similarList.Add(CalcSimilarDegree(SourceImg_Hash, hash));
+            }
+        }
+
+        /*public bool Is_Dark()
+        {
+            bool isSim = false;
+            if (CalcSimilarDegree(SourceImg_Hash, Properties.Resources.DarkImageHash.ToString()) <= level)
+                isSim = true;
+            return isSim;
+        }*/
+
+        List<string> hashList;
+        /*public void GetAllHash()    //獲取所有圖片的Hash值
+        {
+            hashList = new List<string>();
+            foreach (string fname in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "image/"))
+            {
+                Image img = Image.FromFile(fname);
+                hashList.Add(GetHash(img));
+            }
+        }*/
+
+        public void Get_ELcap_Hash()
+        {
+            Cap_El_SC();
+            SourceImg_Hash = GetHash(SourceImg);
+        }
+
+
+        Image SourceImg;
+        string SourceImg_Hash;
         Byte[] grayValues;
         Byte average;
         String reslut;
@@ -406,6 +555,12 @@ namespace Raid_ControlCounter
         // Step 2 : Reduce Color
         Bitmap bitMap;
         Byte[] grayValues2;
+
+        private void Paint_Panel(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private Byte[] ReduceColor(Image image)
         {
             bitMap = new Bitmap(image);

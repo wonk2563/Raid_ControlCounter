@@ -1,2 +1,3 @@
-hotkey=162
-hotkey2=0
+hotkey1=162,LCtrl
+hotkey2=0,無
+hotkey3=162,LCtrl

@@ -8,15 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
+using static Raid_ControlCounter.Hotkeys;
 
 namespace Raid_ControlCounter
 {
     public partial class _115 : Form
     {
         GlobalKeyboardHook gHook;
-        int  hotkey = 0 , hotkey2 = 0;
-        decimal _115_CD = 30;
-
+        int  hotkey = 0 , hotkey2 = 0, hotkey3 = 0;
+        decimal _115_CD = 60;
 
         public _115()
         {
@@ -26,7 +27,9 @@ namespace Raid_ControlCounter
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
                 gHook.HookedKeys.Add(key);
             gHook.hook();
-            ReadIDsByTXT();            
+
+            SetHotkeyValue(Hotkeys.ReadTXT("115_config.txt"));
+            Stop();
         }
 
         private void gHook_KeyDown(object sender, KeyEventArgs e)
@@ -35,12 +38,36 @@ namespace Raid_ControlCounter
             {
                 if (count_down == _115_CD)
                 {
-                    this.timer1.Stop();
-                    count_down = _115_CD;
-                    label1.Text = Convert.ToString(_115_CD);
-                    this.timer1.Start();
+                    Start();
                 }                    
             }
+            if (e.KeyValue == hotkey3 && count_down != _115_CD)
+            {
+                Start();
+            }
+        }        
+
+        private void Start()
+        {
+            this.timer1.Stop();
+            stopWatch.Restart();
+            count_down = _115_CD;
+            label1.Text = Convert.ToString(_115_CD);
+            stopTime = _115_CD * 1000;
+            this.timer1.Start();
+            stopWatch.Start();
+        }
+
+        private void Stop()
+        {
+            this.timer1.Stop();
+            label1.Text = Convert.ToString(_115_CD);
+        }
+
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.DarkGray, ButtonBorderStyle.Solid);
         }
 
         private void 快捷鍵ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,6 +76,7 @@ namespace Raid_ControlCounter
             keysForm.FormClosed += new FormClosedEventHandler(Form_FormClosed);
             gHook.unhook();
             this.timer1.Stop();
+            stopWatch.Restart();
             keysForm.Show();
             this.Hide();
         }
@@ -57,66 +85,36 @@ namespace Raid_ControlCounter
         {
             this.Show();
             count_down = _115_CD;
-            ReadIDsByTXT();
+            Stop();
+            SetHotkeyValue(Hotkeys.ReadTXT("115_config.txt"));
             gHook.hook();
-        }
-        private void ReadIDsByTXT()
-        {
-            string name = "", stutas = "";
-            string path = AppDomain.CurrentDomain.BaseDirectory + "configs/115_config.txt";
-            if (System.IO.File.Exists(path))
-            {
-                try
-                {
-                    string[] lines = System.IO.File.ReadAllLines(@path);
+        }        
 
-                    foreach (string line in lines)
-                    {
-                        string[] words = line.Split('=');
-                        for (int j = 0; j < words.Length; j++)
-                        {
-                            if (words.Length == 2)
-                            {
-                                name = words[0];
-                                stutas = words[1];
-                            }
-                                                
-                            if (name == "hotkey")
-                                hotkey = Int32.Parse(stutas);
-                            if (name == "hotkey2")
-                                hotkey2 = Int32.Parse(stutas);
-                        }
-                    }
-                }
-                catch (Exception)
-                {                    
-                    File.Create(path).Close();
-                    ReadIDsByTXT();
-                    return;
-                }
-            }
-            else
-            {                
-                File.Create(path).Close();
-                ReadIDsByTXT();
-                return;
-            }
-
-            this.timer1.Stop();
-            label1.Text = Convert.ToString(_115_CD);            
-        }
-
-        decimal count_down = 30;
+        decimal count_down = 60;
+        decimal stopTime, remainingTime;
+        Stopwatch stopWatch = new Stopwatch();
         private void timer1_Tick(object sender, EventArgs e)
-        {            
-            count_down -= (decimal)0.1;
-            label1.Text = Convert.ToString(count_down);
-            if (count_down <= 0)
+        {
+            remainingTime = decimal.Round((stopTime - stopWatch.ElapsedMilliseconds) / 1000, 1);
+            count_down = remainingTime;
+            label1.Text = Convert.ToString(remainingTime);
+            if (stopTime <= stopWatch.ElapsedMilliseconds)
             {
-                this.timer1.Stop();
+                timer1.Stop();
+                stopWatch.Restart();
                 count_down = _115_CD;
                 label1.Text = Convert.ToString(0);
             }
+        }
+
+        private void SetHotkeyValue(Tuple<int[], string[], int, bool> tuple)
+        {
+            if (tuple.Item1.Length > 0)
+            {
+                hotkey = tuple.Item1[0];
+                hotkey2 = tuple.Item1[1];
+                hotkey3 = tuple.Item1[2];
+            }            
         }
     }
 }

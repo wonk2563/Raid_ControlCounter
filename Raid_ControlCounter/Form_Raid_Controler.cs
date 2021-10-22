@@ -23,8 +23,11 @@ namespace Raid_ControlCounter
         public Form_Raid_Controler()
         {
             InitializeComponent();
-            comboBox1.SelectedItem = "F";
+
+            hotkeyName1 = "F";
+            label1.Text = "F";
             hotkey = 70;
+
             ReadIDsByTXT();            
             gHook = new GlobalKeyboardHook();
             gHook.KeyDown += new KeyEventHandler(gHook_KeyDown);
@@ -59,7 +62,7 @@ namespace Raid_ControlCounter
                 i++;
             }
             configs[19] = "ctrlSec=" + ctrlSec;
-            configs[20] = "hotkey=" + hotkey;
+            configs[20] = "hotkey=" + hotkey + "," + hotkeyName1;
             configs[21] = "selection=" + selection;
 
             System.IO.File.WriteAllLines(@AppPath + "/configs/raid_config.txt", configs);
@@ -86,74 +89,10 @@ namespace Raid_ControlCounter
                             }
 
                             if (name == "hotkey")
-                            {                                
-                                switch (stutas)
-                                {
-                                    case "81":
-                                        comboBox1.SelectedItem = "Q";
-                                        hotkey = 81;
-                                        break;
-                                    case "87":
-                                        comboBox1.SelectedItem = "W";
-                                        hotkey = 87;
-                                        break;
-                                    case "69":
-                                        comboBox1.SelectedItem = "E";
-                                        hotkey = 69;
-                                        break;
-                                    case "82":
-                                        comboBox1.SelectedItem = "R";
-                                        hotkey = 82;
-                                        break;
-                                    case "84":
-                                        comboBox1.SelectedItem = "T";
-                                        hotkey = 84;
-                                        break;
-                                    case "65":
-                                        comboBox1.SelectedItem = "A";
-                                        hotkey = 65;
-                                        break;
-                                    case "83":
-                                        comboBox1.SelectedItem = "S";
-                                        hotkey = 83;
-                                        break;
-                                    case "68":
-                                        comboBox1.SelectedItem = "D";
-                                        hotkey = 68;
-                                        break;
-                                    case "70":
-                                        comboBox1.SelectedItem = "F";
-                                        hotkey = 70;
-                                        break;
-                                    case "67":
-                                        comboBox1.SelectedItem = "C";
-                                        hotkey = 67;
-                                        break;
-                                    case "49":
-                                        comboBox1.SelectedItem = "1";
-                                        hotkey = 49;
-                                        break;
-                                    case "50":
-                                        comboBox1.SelectedItem = "2";
-                                        hotkey = 50;
-                                        break;
-                                    case "51":
-                                        comboBox1.SelectedItem = "3";
-                                        hotkey = 51;
-                                        break;
-                                    case "52":
-                                        comboBox1.SelectedItem = "4";
-                                        hotkey = 52;
-                                        break;
-                                    case "53":
-                                        comboBox1.SelectedItem = "5";
-                                        hotkey = 53;
-                                        break;
-                                    case "54":
-                                        comboBox1.SelectedItem = "6";
-                                        hotkey = 54;
-                                        break;
-                                }
+                            {
+                                hotkey = Int32.Parse(stutas.Split(',')[0]);
+                                hotkeyName = stutas.Split(',')[1];
+                                label1.Text = hotkeyName;
                             }
 
                             if (name == "selection")
@@ -233,8 +172,11 @@ namespace Raid_ControlCounter
             radioButton8.Checked = false;
             radioButton9.Checked = false;
             radioButton10.Checked = false;
-            comboBox1.SelectedItem = "F";
+
+            hotkeyName1 = "F";
+            label1.Text = "F";
             hotkey = 70;
+
             selection = "";
         }
 
@@ -366,64 +308,7 @@ namespace Raid_ControlCounter
                 ctrlSec = 0;
             label3.Text = Convert.ToString(ctrlSec);
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox ComboBox1 = (ComboBox)sender;
-            string selectedString = (string)ComboBox1.SelectedItem;
-            // Convert it to lowercase.
-            switch (selectedString)
-            {
-                case "Q":
-                    hotkey = 81;
-                    break;
-                case "W":
-                    hotkey = 87;
-                    break;
-                case "E":
-                    hotkey = 69;
-                    break;
-                case "R":
-                    hotkey = 82;
-                    break;
-                case "T":
-                    hotkey = 84;
-                    break;
-                case "A":
-                    hotkey = 65;
-                    break;
-                case "S":
-                    hotkey = 83;
-                    break;
-                case "D":
-                    hotkey = 68;
-                    break;
-                case "F":
-                    hotkey = 70;
-                    break;
-                case "C":
-                    hotkey = 67;
-                    break;
-                case "1":
-                    hotkey = 49;
-                    break;
-                case "2":
-                    hotkey = 50;
-                    break;
-                case "3":
-                    hotkey = 51;
-                    break;
-                case "4":
-                    hotkey = 52;
-                    break;
-                case "5":
-                    hotkey = 53;
-                    break;
-                case "6":
-                    hotkey = 54;
-                    break;
-            }
-        }
+        
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
@@ -449,6 +334,61 @@ namespace Raid_ControlCounter
             else
                 ctrlSec = 0;
             label3.Text = Convert.ToString(ctrlSec);
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //======================快捷鍵設定=========================
+        private void pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            pictureBox.BackColor = Color.LightGray;
+        }
+
+        private void pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            pictureBox.BackColor = Color.Transparent;
+        }
+
+        Form_Hotkey form_Hotkey;
+        int pBoxTag = 0;
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            pBoxTag = Int32.Parse(pictureBox.Tag.ToString());
+            form_Hotkey = new Form_Hotkey("", true);
+            form_Hotkey.FormClosing += new FormClosingEventHandler(Form_FormClosing);
+            form_Hotkey.Show();
+            gHook.unhook();
+            this.Hide();
+        }
+
+        List<int> hotkeyList = new List<int>();
+        string hotkeyName, hotkeyName1;
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            hotkeyList = form_Hotkey.Gethokeys;
+            hotkeyName = form_Hotkey.GethokeysName;
+            if (hotkeyList.Count != 0)
+                Init();
+            gHook.hook();
+            this.Show();
+        }
+
+        private void Init()
+        {
+            if (pBoxTag == 1)
+            {
+                hotkeyName1 = hotkeyName;
+                label1.Text = hotkeyName1;
+                hotkey = hotkeyList[0];
+            }
+
+            pBoxTag = 0;
         }
     }
 }

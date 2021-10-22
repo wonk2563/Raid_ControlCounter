@@ -1,2 +1,2 @@
-hotkey=162
+hotkey=162,LCtrl
 seconds=0

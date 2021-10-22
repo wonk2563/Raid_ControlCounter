@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Drawing.Drawing2D;
 using System.Net;
+using System.Drawing.Text;
+using Microsoft.Win32;
 
 namespace Raid_ControlCounter
 {
     public partial class Form_MainHome : Form
     {
+        
 
         public Form_MainHome()
         {
             InitializeComponent();
-            this.Text = this.Text + Properties.Resources.Version;
+
+            label_VERSION.Text = "Ver " + Properties.Resources.Version;
             Initial();
             Create_LocationConfig();
             ReadIDsByTXT();
+            Cheak_Image_Hash();
         }
 
 
@@ -291,6 +291,12 @@ namespace Raid_ControlCounter
             dForm = null;
         }
 
+        private void Formreport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+            reportForm = null;
+        }
+
 
         //=================其他按鈕=====================
 
@@ -305,6 +311,15 @@ namespace Raid_ControlCounter
             dForm = new Form_About();
             dForm.FormClosed += new FormClosedEventHandler(Formabout_FormClosed);
             dForm.Show();
+            this.Hide();
+        }
+
+        Form_Report reportForm;
+        private void btn_report_Click(object sender, EventArgs e)
+        {
+            reportForm = new Form_Report();
+            reportForm.FormClosed += new FormClosedEventHandler(Formreport_FormClosed);
+            reportForm.Show();
             this.Hide();
         }
 
@@ -328,6 +343,37 @@ namespace Raid_ControlCounter
                 form.Location = start_location;
             }           
         }
+
+
+        //====================檢查圖片Hash值====================
+
+        public void Cheak_Image_Hash()
+        {
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            string cheakURI = File.ReadAllText(appPath + "image/cheakURI.txt", Encoding.UTF8);
+            string nowHash = File.ReadAllText(appPath + "image/Hash.txt", Encoding.UTF8);
+
+            try
+            {
+                WebClient wc = new WebClient();
+                string reply = wc.DownloadString(cheakURI);
+
+                if(reply != "")
+                {
+                    if (nowHash != reply)
+                    {
+                        File.WriteAllText(appPath + "image/Hash.txt", reply);
+                    }
+                    else
+                        Console.WriteLine("Hash值相同。");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
 
 
         //====================檢查更新=====================
@@ -370,11 +416,78 @@ namespace Raid_ControlCounter
                 else
                 {
                     File.Delete("data/updateinfo.txt");
-                    MessageBox.Show("目前的版本與伺服器相同或更新。", "檢查更新");      
+                    MessageBox.Show("目前的版本已更新至最新。", "檢查更新");      
                 }
+            }
+            else
+                MessageBox.Show("獲取更新資訊失敗，請檢查網路連線後再試。", "錯誤");
+        }
+
+
+        //=================標題欄=====================
+
+        private void pictureBox_Min_Click(object sender, EventArgs e)
+        {
+            //隱藏程式本身的視窗
+            this.Hide();
+            //通知欄顯示Icon
+            notifyIcon.Visible = true;
+        }
+
+        private void pictureBox_EXIT_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pictureBox_EXIT_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_EXIT.BackgroundImage = Properties.Resources.EXIT;
+        }
+
+        private void pictureBox_EXIT_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox_EXIT.BackgroundImage = Properties.Resources.EXIT_ON;
+        }
+
+        private void pictureBox_Min_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox_Min.BackgroundImage = Properties.Resources.MIN;
+        }
+
+        private void pictureBox_Min_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox_Min.BackgroundImage = Properties.Resources.MIN_ON;
+        }
+
+        //=================拖動視窗=====================
+
+        private Point mPoint;
+        private void panel_CTRLBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            mPoint = new Point(e.X, e.Y);
+        }
+
+        private void panel_CTRLBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Location = new Point(this.Location.X + e.X - mPoint.X, this.Location.Y + e.Y - mPoint.Y);
             }
         }
 
+        private void label_Box_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Location = new Point(this.Location.X + e.X - mPoint.X, this.Location.Y + e.Y - mPoint.Y);
+            }
+        }
+
+        private void label_Box_MouseDown(object sender, MouseEventArgs e)
+        {
+            mPoint = new Point(e.X, e.Y);
+        }
 
 
         //=================縮小到工具列=====================

@@ -7,11 +7,12 @@
     <ProjectGuid>{1B82F0F9-5B84-4602-8EFA-92E47CE0A59A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Raid_ControlCounter</RootNamespace>
-    <AssemblyName>Raid_ControlCounter</AssemblyName>
+    <AssemblyName>毛毛計時TREE</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,8 +25,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -56,6 +57,21 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>9B8F0941490F6464BF341B0BFEF2A58BF1921587</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Raid_ControlCounter_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
@@ -89,29 +105,41 @@
     <Compile Include="Form_115_Home.Designer.cs">
       <DependentUpon>Form_115_Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_SendMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SendMail.Designer.cs">
+      <DependentUpon>Form_SendMail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report.Designer.cs">
+      <DependentUpon>Form_Report.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Customize_Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Customize_Home.Designer.cs">
       <DependentUpon>Form_Customize_Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Customize_Setting.cs">
+    <Compile Include="Form_Customize_Hotkey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Customize_Setting.Designer.cs">
-      <DependentUpon>Form_Customize_Setting.cs</DependentUpon>
+    <Compile Include="Form_Customize_Hotkey.Designer.cs">
+      <DependentUpon>Form_Customize_Hotkey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_155_Setting.cs">
+    <Compile Include="Form_155_Hotkey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_155_Setting.Designer.cs">
-      <DependentUpon>Form_155_Setting.cs</DependentUpon>
+    <Compile Include="Form_155_Hotkey.Designer.cs">
+      <DependentUpon>Form_155_Hotkey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CEL_Setting.cs">
+    <Compile Include="Form_CEL_Hotkey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_CEL_Setting.Designer.cs">
-      <DependentUpon>Form_CEL_Setting.cs</DependentUpon>
+    <Compile Include="Form_CEL_Hotkey.Designer.cs">
+      <DependentUpon>Form_CEL_Hotkey.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_155_Home.cs">
       <SubType>Form</SubType>
@@ -143,11 +171,11 @@
     <Compile Include="Form_update.Designer.cs">
       <DependentUpon>Form_update.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_VI_Hotkey.cs">
+    <Compile Include="Form_Hotkey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_VI_Hotkey.Designer.cs">
-      <DependentUpon>Form_VI_Hotkey.cs</DependentUpon>
+    <Compile Include="Form_Hotkey.Designer.cs">
+      <DependentUpon>Form_Hotkey.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_115_Hotkey.cs">
       <SubType>Form</SubType>
@@ -167,6 +195,7 @@
     <Compile Include="Form_About.Designer.cs">
       <DependentUpon>Form_About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hotkeys.cs" />
     <Compile Include="GlobalKeyBoardHook.cs" />
     <Compile Include="Form_MainHome.cs">
       <SubType>Form</SubType>
@@ -190,17 +219,23 @@
     <EmbeddedResource Include="Form_115_Home.resx">
       <DependentUpon>Form_115_Home.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_SendMail.resx">
+      <DependentUpon>Form_SendMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report.resx">
+      <DependentUpon>Form_Report.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Customize_Home.resx">
       <DependentUpon>Form_Customize_Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Customize_Setting.resx">
-      <DependentUpon>Form_Customize_Setting.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Customize_Hotkey.resx">
+      <DependentUpon>Form_Customize_Hotkey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_155_Setting.resx">
-      <DependentUpon>Form_155_Setting.cs</DependentUpon>
+    <EmbeddedResource Include="Form_155_Hotkey.resx">
+      <DependentUpon>Form_155_Hotkey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_CEL_Setting.resx">
-      <DependentUpon>Form_CEL_Setting.cs</DependentUpon>
+    <EmbeddedResource Include="Form_CEL_Hotkey.resx">
+      <DependentUpon>Form_CEL_Hotkey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_155_Home.resx">
       <DependentUpon>Form_155_Home.cs</DependentUpon>
@@ -217,8 +252,8 @@
     <EmbeddedResource Include="Form_update.resx">
       <DependentUpon>Form_update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_VI_Hotkey.resx">
-      <DependentUpon>Form_VI_Hotkey.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Hotkey.resx">
+      <DependentUpon>Form_Hotkey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_115_Hotkey.resx">
       <DependentUpon>Form_115_Hotkey.cs</DependentUpon>
@@ -241,6 +276,8 @@
       <DependentUpon>Form_VI_Home.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
+    <None Include="bin\Debug\fonts\Futura Bk BT.ttf" />
+    <None Include="bin\Debug\fonts\OPPOSans M.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -256,13 +293,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Raid_ControlCounter_TemporaryKey.pfx" />
     <None Include="Resources\about.png" />
     <None Include="Resources\close.png" />
     <None Include="Resources\close2.png" />
     <None Include="Resources\cheak.png" />
+    <None Include="Resources\Futura Book font.ttf" />
     <None Include="Resources\on.png" />
     <None Include="Resources\off2.png" />
-    <None Include="Resources\hide.png" />
     <None Include="Resources\2Heroic_Wrath_Mirror %281%29.png" />
     <None Include="Resources\10-6Title32.png" />
     <None Include="Resources\Heroic_Wrath_Mirror %281%29.png" />
@@ -289,14 +327,85 @@
     <None Include="Resources\Icon_-_Shakti.png" />
     <None Include="Resources\HQ_Shop_Item_WaterSphere %281%29.png" />
     <None Include="Resources\Icon_-_Nyx_Pieta.png" />
+    <None Include="Resources\OPPOSans-M.ttf" />
     <None Include="Resources\update.png" />
-    <None Include="Resources\refresh.png" />
     <None Include="115_b.png" />
     <None Include="12_b.png" />
     <None Include="icon.ico" />
     <None Include="Resources\vi_b.png" />
     <None Include="155_b.png" />
     <None Include="cel_b.png" />
+    <None Include="Resources\application_exit_icon_181084.png" />
+    <None Include="Resources\list_remove_icon_181163.png" />
+    <None Include="Resources\EXIT_ON.png" />
+    <None Include="Resources\MIN_ON.png" />
+    <None Include="Resources\Spinner-1s-200px.gif" />
+    <None Include="Resources\done.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\refresh2.png" />
+    <None Include="Resources\refresh3.png" />
+    <None Include="Resources\未命名.png" />
+    <None Include="Resources\A.png" />
+    <None Include="Resources\Alt.png" />
+    <None Include="Resources\B.png" />
+    <None Include="Resources\C.png" />
+    <None Include="Resources\Ctrl.png" />
+    <None Include="Resources\D.png" />
+    <None Include="Resources\E.png" />
+    <None Include="Resources\F.png" />
+    <None Include="Resources\G.png" />
+    <None Include="Resources\H.png" />
+    <None Include="Resources\I.png" />
+    <None Include="Resources\J.png" />
+    <None Include="Resources\K.png" />
+    <None Include="Resources\L.png" />
+    <None Include="Resources\M.png" />
+    <None Include="Resources\N.png" />
+    <None Include="Resources\O.png" />
+    <None Include="Resources\P.png" />
+    <None Include="Resources\Q.png" />
+    <None Include="Resources\R.png" />
+    <None Include="Resources\S.png" />
+    <None Include="Resources\Shift.png" />
+    <None Include="Resources\Space.png" />
+    <None Include="Resources\T.png" />
+    <None Include="Resources\U.png" />
+    <None Include="Resources\V.png" />
+    <None Include="Resources\W.png" />
+    <None Include="Resources\X.png" />
+    <None Include="Resources\Y.png" />
+    <None Include="Resources\Z.png" />
+    <None Include="Resources\CAPS.png" />
+    <None Include="Resources\0.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\7.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\9.png" />
+    <None Include="Resources\F1.png" />
+    <None Include="Resources\F2.png" />
+    <None Include="Resources\F3.png" />
+    <None Include="Resources\F4.png" />
+    <None Include="Resources\F5.png" />
+    <None Include="Resources\F6.png" />
+    <None Include="Resources\F7.png" />
+    <None Include="Resources\F8.png" />
+    <None Include="Resources\F9.png" />
+    <None Include="Resources\F10.png" />
+    <None Include="Resources\F11.png" />
+    <None Include="Resources\F12.png" />
+    <None Include="Resources\TAB.png" />
+    <None Include="Resources\view_more_horizontal_icon_181219.png" />
+    <None Include="Resources\hide1.png" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\EXIT.png" />
+    <None Include="Resources\MIN.png" />
     <Content Include="stopwatch-timer-countdown-counter-512.ico" />
   </ItemGroup>
   <ItemGroup>

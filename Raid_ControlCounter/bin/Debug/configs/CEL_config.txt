@@ -1,3 +1,4 @@
-hotkey=162
-level=40
+hotkey1=162,LCtrl
+hotkey2=162,LCtrl
 autocheak=True
+level=40

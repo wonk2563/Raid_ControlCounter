@@ -60,7 +60,7 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(328, 506);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
@@ -72,7 +72,7 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(171, 506);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
@@ -84,7 +84,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(475, 508);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
@@ -94,8 +94,8 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(555, 508);
+            this.label3.Font = new System.Drawing.Font("Futura Bk BT", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(546, 509);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 19);
@@ -104,7 +104,7 @@
             // 
             // ICE
             // 
-            this.ICE.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ICE.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ICE.Image = ((System.Drawing.Image)(resources.GetObject("ICE.Image")));
             this.ICE.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ICE.Location = new System.Drawing.Point(467, 20);
@@ -118,7 +118,7 @@
             // 
             // DARK
             // 
-            this.DARK.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.DARK.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DARK.Image = ((System.Drawing.Image)(resources.GetObject("DARK.Image")));
             this.DARK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DARK.Location = new System.Drawing.Point(5, 20);
@@ -132,7 +132,7 @@
             // 
             // HERO
             // 
-            this.HERO.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.HERO.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HERO.Image = ((System.Drawing.Image)(resources.GetObject("HERO.Image")));
             this.HERO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.HERO.Location = new System.Drawing.Point(196, 20);
@@ -147,18 +147,18 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.label7.Location = new System.Drawing.Point(8, 476);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(247, 19);
+            this.label7.Size = new System.Drawing.Size(249, 20);
             this.label7.TabIndex = 24;
             this.label7.Text = "※此頁降抗值為所有降抗上滿的數值";
             // 
             // RS
             // 
-            this.RS.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.RS.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RS.Image = ((System.Drawing.Image)(resources.GetObject("RS.Image")));
             this.RS.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.RS.Location = new System.Drawing.Point(313, 180);
@@ -172,7 +172,7 @@
             // 
             // HE
             // 
-            this.HE.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.HE.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HE.Image = ((System.Drawing.Image)(resources.GetObject("HE.Image")));
             this.HE.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.HE.Location = new System.Drawing.Point(159, 262);
@@ -186,7 +186,7 @@
             // 
             // BL
             // 
-            this.BL.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BL.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BL.Image = ((System.Drawing.Image)(resources.GetObject("BL.Image")));
             this.BL.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BL.Location = new System.Drawing.Point(5, 262);
@@ -200,7 +200,7 @@
             // 
             // MN
             // 
-            this.MN.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.MN.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MN.Image = ((System.Drawing.Image)(resources.GetObject("MN.Image")));
             this.MN.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.MN.Location = new System.Drawing.Point(467, 99);
@@ -214,7 +214,7 @@
             // 
             // BQ
             // 
-            this.BQ.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BQ.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BQ.Image = ((System.Drawing.Image)(resources.GetObject("BQ.Image")));
             this.BQ.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BQ.Location = new System.Drawing.Point(159, 180);
@@ -228,7 +228,7 @@
             // 
             // ES
             // 
-            this.ES.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ES.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ES.Image = ((System.Drawing.Image)(resources.GetObject("ES.Image")));
             this.ES.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ES.Location = new System.Drawing.Point(5, 180);
@@ -242,7 +242,7 @@
             // 
             // BR
             // 
-            this.BR.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.BR.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BR.Image = ((System.Drawing.Image)(resources.GetObject("BR.Image")));
             this.BR.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BR.Location = new System.Drawing.Point(313, 99);
@@ -256,7 +256,7 @@
             // 
             // VI
             // 
-            this.VI.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.VI.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VI.Image = ((System.Drawing.Image)(resources.GetObject("VI.Image")));
             this.VI.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.VI.Location = new System.Drawing.Point(159, 99);
@@ -270,7 +270,7 @@
             // 
             // CE
             // 
-            this.CE.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.CE.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CE.Image = ((System.Drawing.Image)(resources.GetObject("CE.Image")));
             this.CE.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CE.Location = new System.Drawing.Point(5, 99);
@@ -285,18 +285,18 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.label5.Location = new System.Drawing.Point(8, 456);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(179, 19);
+            this.label5.Size = new System.Drawing.Size(181, 20);
             this.label5.TabIndex = 25;
             this.label5.Text = "※BQ降抗請留到最後勾選";
             // 
             // NI
             // 
-            this.NI.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.NI.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NI.Image = ((System.Drawing.Image)(resources.GetObject("NI.Image")));
             this.NI.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.NI.Location = new System.Drawing.Point(467, 23);
@@ -310,7 +310,7 @@
             // 
             // NP
             // 
-            this.NP.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.NP.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NP.Image = ((System.Drawing.Image)(resources.GetObject("NP.Image")));
             this.NP.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.NP.Location = new System.Drawing.Point(467, 180);
@@ -324,7 +324,7 @@
             // 
             // RH
             // 
-            this.RH.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.RH.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RH.Image = ((System.Drawing.Image)(resources.GetObject("RH.Image")));
             this.RH.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.RH.Location = new System.Drawing.Point(313, 23);
@@ -338,7 +338,7 @@
             // 
             // OZ
             // 
-            this.OZ.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.OZ.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OZ.Image = ((System.Drawing.Image)(resources.GetObject("OZ.Image")));
             this.OZ.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.OZ.Location = new System.Drawing.Point(159, 23);
@@ -352,7 +352,7 @@
             // 
             // RM
             // 
-            this.RM.Font = new System.Drawing.Font("微軟正黑體", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.RM.Font = new System.Drawing.Font("OPPOSans M", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RM.Image = ((System.Drawing.Image)(resources.GetObject("RM.Image")));
             this.RM.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.RM.Location = new System.Drawing.Point(5, 23);
@@ -380,7 +380,7 @@
             this.groupBox1.Controls.Add(this.BL);
             this.groupBox1.Controls.Add(this.HE);
             this.groupBox1.Controls.Add(this.RS);
-            this.groupBox1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox1.Font = new System.Drawing.Font("OPPOSans M", 8.999999F);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(595, 337);
@@ -393,6 +393,7 @@
             this.groupBox2.Controls.Add(this.DARK);
             this.groupBox2.Controls.Add(this.ICE);
             this.groupBox2.Controls.Add(this.HERO);
+            this.groupBox2.Font = new System.Drawing.Font("OPPOSans M", 8.999999F);
             this.groupBox2.Location = new System.Drawing.Point(12, 360);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(595, 93);
@@ -400,7 +401,7 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "共通";
             // 
-            // Form2
+            // Form_Raid_Resis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -420,9 +421,9 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "Form_Raid_Resis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "降抗方式選擇";
+            this.Text = "降抗角色設定";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

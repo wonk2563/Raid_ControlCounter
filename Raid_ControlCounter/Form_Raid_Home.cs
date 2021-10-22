@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Raid_ControlCounter
 {
@@ -36,11 +37,18 @@ namespace Raid_ControlCounter
             ReadIDsByTXT();
         }
 
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.DarkGray, ButtonBorderStyle.Solid);
+        }
+
+
         private void gHook_KeyDown(object sender, KeyEventArgs e)
         {            
             if (e.KeyValue == hotkey && e.KeyValue != 0)
             {
-                this.timer1.Stop();
+                timer1.Stop();
+                stopWatch.Restart();
                 freezeTime = ctrlSec * ((300m + resis) / 500m);
                 freezeTime = Decimal.Round(freezeTime,1);
                 label1.Text = Convert.ToString(freezeTime);
@@ -48,7 +56,11 @@ namespace Raid_ControlCounter
                 if (isNP)
                     backgroundWorker1.RunWorkerAsync();
                 else
+                {
+                    stopTime = freezeTime * 1000;
                     this.timer1.Start();
+                    stopWatch.Start();
+                }                    
             }
         }
 
@@ -61,7 +73,8 @@ namespace Raid_ControlCounter
             Form_Raid_Resis bForm = new Form_Raid_Resis();
             bForm.FormClosed += new FormClosedEventHandler(Form_FormClosed);
             gHook.unhook();
-            this.timer1.Stop();
+            timer1.Stop();
+            stopWatch.Restart();
             bForm.Show();
             this.Hide();
         }
@@ -70,21 +83,24 @@ namespace Raid_ControlCounter
             Form_Raid_Controler cForm = new Form_Raid_Controler();
             cForm.FormClosed += new FormClosedEventHandler(Form_FormClosed);
             gHook.unhook();
-            this.timer1.Stop();
+            timer1.Stop();
+            stopWatch.Restart();
             cForm.Show();
             this.Hide();
         }
-        
 
+        decimal stopTime , remainingTime;
+        Stopwatch stopWatch = new Stopwatch();
         private void timer1_Tick(object sender, EventArgs e)
         {
-            freezeTime -= (decimal)0.1;
-            label1.Text = Convert.ToString(freezeTime);
-            if(freezeTime <= 0)
+            remainingTime = decimal.Round((stopTime - stopWatch.ElapsedMilliseconds) / 1000,1);
+            label1.Text = Convert.ToString(remainingTime);
+            if (stopTime <= stopWatch.ElapsedMilliseconds)
             {
-                this.timer1.Stop();
-                freezeTime = 0;
-                label1.Text = Convert.ToString(freezeTime);
+                timer1.Stop();
+                stopWatch.Restart();
+                stopTime = 0;
+                label1.Text = Convert.ToString(stopTime);
             }
         }
 
@@ -95,7 +111,9 @@ namespace Raid_ControlCounter
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            stopTime = freezeTime * 1000;
             timer1.Start();
+            stopWatch.Start();
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
@@ -131,7 +149,7 @@ namespace Raid_ControlCounter
                             if (name == "ctrlSec")
                                 ctrlSec = decimal.Parse(stutas);
                             if (name == "hotkey")
-                                hotkey = Int32.Parse(stutas);
+                                hotkey = Int32.Parse(stutas.Split(',')[0]);
                             if (name == "selection")
                                 if(stutas == "NP")
                                     isNP = true;
