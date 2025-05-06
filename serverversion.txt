@@ -1,0 +1,6 @@
+1.1.8
+MaoTimeCounter
+．將軟體完全託管至 Github
+※此次更新不會重置計時器設定
+※有問題的話再找我 :D
+https://github.com/wonk2563/Raid_ControlCounter/releases/download/Release/MaoTimeCounter_updateData.zip
